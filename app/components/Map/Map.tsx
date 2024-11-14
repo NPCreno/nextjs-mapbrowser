@@ -2,7 +2,7 @@
 
 import React, { use, useState, useEffect } from "react";
 import "leaflet/dist/leaflet.css";
-import { MapContainer, Marker, TileLayer, Popup } from "react-leaflet";
+import { MapContainer, Marker, TileLayer, Popup, useMap } from "react-leaflet";
 import { locations } from "./locations";
 import { Icon } from "leaflet";
 
@@ -12,18 +12,37 @@ const customIcon = new Icon({
 });
 
 export default function Map() {
-  const [centerVal, setCenterVal] = useState([39.9944, -75.6066]);
-  const [zoomVal, setZoomVal] = useState(4);
+  const [zoomVal, setZoomVal] = useState(8);
   const [currentState, setCurrentState] = useState(0);
+  const [centerVal, setCenterVal] = useState(
+    locations[currentState][0].geoCode
+  );
+  const MapUpdater = () => {
+    const map = useMap();
+
+    useEffect(() => {
+      // Update map center and zoom
+      map.setView(centerVal, zoomVal);
+    }, [centerVal, zoomVal]);
+
+    return null;
+  };
 
   function changeState(index) {
     setCurrentState(index);
+    setCenterVal(locations[currentState][1].geoCode);
+    setZoomVal(8);
   }
 
   function handleSelectLocation(index: number) {
     setZoomVal(20);
-    setCenterVal(locations[0][index].geoCode);
-    console.log("new center value:", centerVal);
+    setCenterVal(locations[currentState][index].geoCode);
+    console.log(
+      "new center value:",
+      centerVal,
+      "zoom value changed: ",
+      zoomVal
+    );
   }
 
   return (
@@ -47,6 +66,7 @@ export default function Map() {
             </Marker>
           </div>
         ))}
+        <MapUpdater />
       </MapContainer>
       <div className="flex w-lvw justify-evenly">
         <button
