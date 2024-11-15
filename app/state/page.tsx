@@ -2,40 +2,43 @@
 import { useState } from "react";
 import { clinics } from "./clinics";
 import Map from "../components/Map/Map";
-
-const Carousel: React.FC = () => {
+import StateButtons from "../components/Map/StateButtons";
+const state: React.FC = () => {
+  const [currentState, setCurrentState] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(0);
-
-  const visibleClinics = clinics.slice(currentIndex, currentIndex + 4);
+  const visibleClinics = clinics[currentState].slice(
+    currentIndex,
+    currentIndex + 4
+  );
   const maxIndex = clinics.length - 4;
-  const totalDots = Math.ceil(clinics.length / 4);
-  const activeDotIndex = Math.min(Math.floor(currentIndex / 4), totalDots - 1);
+  const totalDots = Math.ceil(clinics[currentState].length / 4);
 
   const handlePrev = () => {
     setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? clinics.length - 4 : prevIndex - 1
+      prevIndex === 0 ? clinics[currentState].length - 4 : prevIndex - 1
     );
     console.log("current index is at:", currentIndex);
   };
 
   const handleNext = () => {
     setCurrentIndex((prevIndex) =>
-      prevIndex + 4 >= clinics.length ? 0 : prevIndex + 1
+      prevIndex + 4 >= clinics[currentState].length ? 0 : prevIndex + 1
     );
     console.log("current index is at:", currentIndex);
   };
 
   return (
     <>
-      <div className="w-auto h-80 p-8">
-        <Map></Map>
+      <div className="w-auto h-50vh">
+        <Map selectedState={currentState}></Map>
       </div>
+      <StateButtons></StateButtons>
       <div className="relative w-full max-w-5xl mx-auto">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {visibleClinics.map((clinic) => (
             <div
               key={clinic.id}
-              className="rounded-lg overflow-hidden bg-white shadow-md p-4"
+              className="rounded-lg overflow-hidden bg-white shadow-md p-4 min-h-80 max-h-80"
             >
               <img
                 src={clinic.image}
@@ -88,4 +91,4 @@ const Carousel: React.FC = () => {
   );
 };
 
-export default Carousel;
+export default state;

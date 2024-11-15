@@ -5,38 +5,25 @@ import "leaflet/dist/leaflet.css";
 import { MapContainer, Marker, TileLayer, Popup, useMap } from "react-leaflet";
 import { locations } from "./locations";
 import { Icon } from "leaflet";
+import { clinics } from "@/app/state/clinics";
 
 const customIcon = new Icon({
   iconUrl: "locationMarker.png",
   iconSize: [38, 38],
 });
 
-export default function Map() {
+interface MapProps {
+  selectedState: number; // Defining the prop type
+}
+
+export default function Map({ selectedState }: MapProps) {
   const [zoomVal, setZoomVal] = useState(8);
-  const [currentState, setCurrentState] = useState(0);
-  const [centerVal, setCenterVal] = useState(
-    locations[currentState][0].geoCode
-  );
-  const MapUpdater = () => {
-    const map = useMap();
-
-    useEffect(() => {
-      // Update map center and zoom
-      map.setView(centerVal, zoomVal);
-    }, [centerVal, zoomVal]);
-
-    return null;
-  };
-
-  function changeState(index) {
-    setCurrentState(index);
-    setCenterVal(locations[currentState][1].geoCode);
-    setZoomVal(8);
-  }
+  const [currentState, setCurrentState] = useState(selectedState);
+  const [centerVal, setCenterVal] = useState(clinics[selectedState][0].geocode);
 
   function handleSelectLocation(index: number) {
     setZoomVal(20);
-    setCenterVal(locations[currentState][index].geoCode);
+    setCenterVal(clinics[currentState][index].geocode);
     console.log(
       "new center value:",
       centerVal,
@@ -52,42 +39,22 @@ export default function Map() {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        {locations[currentState].map((location, index) => (
-          <div>
+        {clinics[currentState].map((clinic) => {
+          console.log(clinic.id);
+          return (
             <Marker
-              key={index}
-              position={location.geoCode}
+              key={clinic.id}
+              position={clinic.geocode}
               icon={customIcon}
               eventHandlers={{
-                click: () => handleSelectLocation(index),
+                click: () => handleSelectLocation(clinic.id - 1),
               }}
             >
-              <Popup key={index}>{location.name}</Popup>
+              <Popup>{clinic.name}</Popup>
             </Marker>
-          </div>
-        ))}
-        <MapUpdater />
+          );
+        })}
       </MapContainer>
-      {/* <div className="flex w-lvw justify-evenly">
-        <button
-          className="w-auto border bg-blue-300 hover:bg-blue-400 p-3 rounded"
-          onClick={() => changeState(0)}
-        >
-          Virginia
-        </button>
-        <button
-          className="w-auto border bg-blue-300 hover:bg-blue-400 p-3 rounded"
-          onClick={() => changeState(1)}
-        >
-          Pennsylvania
-        </button>
-        <button
-          className="w- border bg-blue-300 hover:bg-blue-400 p-3 rounded"
-          onClick={() => changeState(2)}
-        >
-          West Virginia
-        </button>
-      </div> */}
     </>
   );
 }
