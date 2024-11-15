@@ -17,7 +17,7 @@ interface MapProps {
 }
 
 export default function Map({ selectedState }: MapProps) {
-  const [zoomVal, setZoomVal] = useState(8);
+  const [zoomVal, setZoomVal] = useState(7);
   const [currentState, setCurrentState] = useState(selectedState);
   const [centerVal, setCenterVal] = useState(clinics[selectedState][0].geocode);
 
@@ -31,6 +31,23 @@ export default function Map({ selectedState }: MapProps) {
       zoomVal
     );
   }
+
+  useEffect(() => {
+    setZoomVal(7);
+    setCurrentState(selectedState); // Update currentState when selectedState changes
+    setCenterVal(clinics[selectedState][0].geocode); // Set new center for the map
+  }, [selectedState]); // Trigger effect when selectedState changes
+
+  const MapUpdater = () => {
+    const map = useMap();
+
+    useEffect(() => {
+      // Update map center and zoom
+      map.setView(centerVal, zoomVal);
+    }, [centerVal, zoomVal]);
+
+    return null;
+  };
 
   return (
     <>
@@ -54,6 +71,7 @@ export default function Map({ selectedState }: MapProps) {
             </Marker>
           );
         })}
+        <MapUpdater />
       </MapContainer>
     </>
   );
