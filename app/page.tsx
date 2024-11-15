@@ -6,7 +6,9 @@ export default function Home() {
   return (
     <div>
       <h1>This is a sample map browser from leaflet and openstreetmap</h1>
-      <Map></Map>
+      <div className="h-svh">
+        <Map></Map>
+      </div>
     </div>
   );
 }

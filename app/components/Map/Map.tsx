@@ -68,7 +68,7 @@ export default function Map() {
         ))}
         <MapUpdater />
       </MapContainer>
-      <div className="flex w-lvw justify-evenly">
+      {/* <div className="flex w-lvw justify-evenly">
         <button
           className="w-auto border bg-blue-300 hover:bg-blue-400 p-3 rounded"
           onClick={() => changeState(0)}
@@ -87,7 +87,7 @@ export default function Map() {
         >
           West Virginia
         </button>
-      </div>
+      </div> */}
     </>
   );
 }

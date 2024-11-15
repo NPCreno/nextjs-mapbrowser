@@ -23,5 +23,5 @@ body {
 /* Size of leaflet */
 
 .leaflet-container {
-  height: 90vh;
+  height: 100%;
 }
