@@ -13,6 +13,9 @@ const state: React.FC = () => {
   const maxIndex = clinics.length - 4;
   const totalDots = Math.ceil(clinics[currentState].length / 4);
 
+  function changeState(index: number) {
+    setCurrentState(index);
+  }
   const handlePrev = () => {
     setCurrentIndex((prevIndex) =>
       prevIndex === 0 ? clinics[currentState].length - 4 : prevIndex - 1
@@ -32,7 +35,43 @@ const state: React.FC = () => {
       <div className="w-auto h-50vh">
         <Map selectedState={currentState}></Map>
       </div>
-      <StateButtons></StateButtons>
+      <div className="flex justify-center items-center flex-col space-y-4 mt-8">
+        <h2 className="text-xl font-semibold text-gray-800">Select a State</h2>
+        <div className="flex space-x-6">
+          <button
+            className={`w-auto px-6 py-3 border rounded-lg text-white font-medium transition duration-300 ${
+              currentState === 0
+                ? "bg-blue-600 hover:bg-blue-500"
+                : "bg-blue-300 hover:bg-blue-400"
+            }`}
+            onClick={() => changeState(0)}
+          >
+            Virginia
+          </button>
+
+          <button
+            className={`w-auto px-6 py-3 border rounded-lg text-white font-medium transition duration-300 ${
+              currentState === 1
+                ? "bg-blue-600 hover:bg-blue-500"
+                : "bg-blue-300 hover:bg-blue-400"
+            }`}
+            onClick={() => changeState(1)}
+          >
+            Pennsylvania
+          </button>
+
+          <button
+            className={`w-auto px-6 py-3 border rounded-lg text-white font-medium transition duration-300 ${
+              currentState === 2
+                ? "bg-blue-600 hover:bg-blue-500"
+                : "bg-blue-300 hover:bg-blue-400"
+            }`}
+            onClick={() => changeState(2)}
+          >
+            West Virginia
+          </button>
+        </div>
+      </div>
       <div className="relative w-full max-w-5xl mx-auto">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {visibleClinics.map((clinic) => (
