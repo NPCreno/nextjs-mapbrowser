@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { clinics } from "./clinics";
 import Map from "../components/Map/Map";
+import Link from "next/link";
 const state: React.FC = () => {
   const [currentState, setCurrentState] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -45,9 +46,8 @@ const state: React.FC = () => {
             }`}
             onClick={() => changeState(0)}
           >
-            Virginia
+            Pennsylvania
           </button>
-
           <button
             className={`w-auto px-6 py-3 border rounded-lg text-white font-medium transition duration-300 ${
               currentState === 1
@@ -56,7 +56,7 @@ const state: React.FC = () => {
             }`}
             onClick={() => changeState(1)}
           >
-            Pennsylvania
+            Virginia
           </button>
 
           <button
