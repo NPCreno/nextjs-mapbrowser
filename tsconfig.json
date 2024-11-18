@@ -22,6 +22,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/components/Map/Map.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/components/Map/Map.jsx", "app/state/[...slug]/page.jsx", "app/state/[slug].jsx", "app/state/[slug].js", "app/state/[slug].js"],
   "exclude": ["node_modules"]
 }

@@ -2,7 +2,6 @@
 import { useState } from "react";
 import { clinics } from "./clinics";
 import Map from "../components/Map/Map";
-import StateButtons from "../components/Map/StateButtons";
 const state: React.FC = () => {
   const [currentState, setCurrentState] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(0);
