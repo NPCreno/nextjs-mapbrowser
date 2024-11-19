@@ -4,7 +4,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import "leaflet/dist/leaflet.css";
 import { MapContainer, Marker, TileLayer, Popup, useMap } from "react-leaflet";
 import { Icon } from "leaflet";
-import { clinics } from "@/app/state/clinics";
+import { clinics } from "@/app/routes/state/clinics";
 
 interface MapProps {
   selectedState: number; // Defining the prop type

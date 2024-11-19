@@ -1,6 +1,6 @@
 import React from "react";
-import Accordion from "../components/Accordion/Accordion";
-import { accordionItems } from "../data/contents";
+import Accordion from "../../components/Accordion/Accordion";
+import { accordionItems } from "../../data/contents";
 const AccordionPage = () => {
   return (
     <div className="container mx-auto p-4">

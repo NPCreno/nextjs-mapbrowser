@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { clinics } from "./clinics";
-import Map from "../components/Map/Map";
+import Map from "@/app/components/Map/Map";
 import Link from "next/link";
 const state: React.FC = () => {
   const [currentState, setCurrentState] = useState(0);
@@ -73,7 +73,7 @@ const state: React.FC = () => {
       </div>
       <div className="relative w-full max-w-5xl mx-auto">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {visibleClinics.map((clinic) => (
+          {clinics[currentState].map((clinic) => (
             <div
               key={clinic.id}
               className="rounded-lg overflow-hidden bg-white shadow-md p-4 min-h-80 max-h-80"
