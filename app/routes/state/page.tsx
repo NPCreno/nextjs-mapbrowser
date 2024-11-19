@@ -38,37 +38,42 @@ const state: React.FC = () => {
       <div className="flex justify-center items-center flex-col space-y-4 mt-8">
         <h2 className="text-xl font-semibold text-gray-800">Select a State</h2>
         <div className="flex space-x-6">
-          <button
-            className={`w-auto px-6 py-3 border rounded-lg text-white font-medium transition duration-300 ${
-              currentState === 0
-                ? "bg-blue-600 hover:bg-blue-500"
-                : "bg-blue-300 hover:bg-blue-400"
-            }`}
-            onClick={() => changeState(0)}
-          >
-            Pennsylvania
-          </button>
-          <button
-            className={`w-auto px-6 py-3 border rounded-lg text-white font-medium transition duration-300 ${
-              currentState === 1
-                ? "bg-blue-600 hover:bg-blue-500"
-                : "bg-blue-300 hover:bg-blue-400"
-            }`}
-            onClick={() => changeState(1)}
-          >
-            Virginia
-          </button>
-
-          <button
-            className={`w-auto px-6 py-3 border rounded-lg text-white font-medium transition duration-300 ${
-              currentState === 2
-                ? "bg-blue-600 hover:bg-blue-500"
-                : "bg-blue-300 hover:bg-blue-400"
-            }`}
-            onClick={() => changeState(2)}
-          >
-            West Virginia
-          </button>
+          <Link href={"/routes/state/VA"}>
+            <button
+              className={`w-auto px-6 py-3 border rounded-lg text-white font-medium transition duration-300 ${
+                currentState === 0
+                  ? "bg-blue-600 hover:bg-blue-500"
+                  : "bg-blue-300 hover:bg-blue-400"
+              }`}
+              onClick={() => changeState(0)}
+            >
+              Virginia
+            </button>
+          </Link>
+          <Link href={"/routes/state/PA"}>
+            <button
+              className={`w-auto px-6 py-3 border rounded-lg text-white font-medium transition duration-300 ${
+                currentState === 1
+                  ? "bg-blue-600 hover:bg-blue-500"
+                  : "bg-blue-300 hover:bg-blue-400"
+              }`}
+              onClick={() => changeState(1)}
+            >
+              Pennsylvania
+            </button>
+          </Link>
+          <Link href={"/routes/state/WV"}>
+            <button
+              className={`w-auto px-6 py-3 border rounded-lg text-white font-medium transition duration-300 ${
+                currentState === 2
+                  ? "bg-blue-600 hover:bg-blue-500"
+                  : "bg-blue-300 hover:bg-blue-400"
+              }`}
+              onClick={() => changeState(2)}
+            >
+              West Virginia
+            </button>
+          </Link>
         </div>
       </div>
       <div className="relative w-full max-w-5xl mx-auto">
